@@ -24,7 +24,7 @@ if __name__ == "__main__":
         team_opt = int(input("Enter an option: "))
 # clean data: remove 'and'; height to int; experience boolean
         for items in players_list:
-            words = items['guardians']``
+            words = items['guardians']
             for word on words:
                 if not word.startswith('and'): continue
                     player_info.update(items)
