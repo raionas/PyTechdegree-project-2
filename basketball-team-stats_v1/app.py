@@ -19,15 +19,16 @@ if __name__ == "__main__":
     elif menu_opt == 2:
         sys.exit()
 # Sub-menu
-        player_info = {}
+        player_info = []
 
         team_opt = int(input("Enter an option: "))
 # clean data: remove 'and'; height to int; experience boolean
         for items in players_list:
             words = items['guardians']
             for word in words:
-                if not word.startswith('and'): continue
-                player_info.update(items)
+                if not word.startswith('and'):
+                    continue
+                    player_info.append([items])
 
 
 # Display number of players: team balancing
