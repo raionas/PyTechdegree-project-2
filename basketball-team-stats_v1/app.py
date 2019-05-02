@@ -24,10 +24,9 @@ if __name__ == "__main__":
         team_opt = int(input("Enter an option: "))
 # clean data: remove 'and'; height to int; experience boolean
         for items in players_list:
-            for item in items['guardians']:
-                word = items.find('and')
-                del items['guardians'][word]
-                player_info.update(items)
+            words = items['guardians']
+            del items['guardians'][word]
+            player_info.update(items)
 
 
 # Display number of players: team balancing
