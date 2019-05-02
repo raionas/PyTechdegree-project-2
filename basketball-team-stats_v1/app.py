@@ -25,9 +25,9 @@ if __name__ == "__main__":
 # clean data: remove 'and'; height to int; experience boolean
         for items in players_list:
             words = items['guardians']
-            for word on words:
+            for word in words:
                 if not word.startswith('and'): continue
-                    player_info.update(items)
+                player_info.update(items)
 
 
 # Display number of players: team balancing
