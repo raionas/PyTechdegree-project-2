@@ -3,9 +3,9 @@ import sys
 
 players_list = constants.PLAYERS
 teams_list = constants.TEAMS
-player_info = {}
 # clean data: remove 'and'; height to int; experience boolean
 def players_stats():
+    player_info = {}
     for items in players_list:
         if items['experience'] == 'YES':
             items['experience'] = 'TRUE'
@@ -18,7 +18,8 @@ def players_stats():
         keeper_str = keeper.replace('and','')
         items['guardians'] = keeper_str.replace('and','')
         player_info.update(items)
-    return player_info
+        print(player_info)
+    return(player_info)
 
 if __name__ == "__main__":
     print("BASKETBALL TEAM STATS TOOL\n")
