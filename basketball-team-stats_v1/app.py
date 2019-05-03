@@ -3,20 +3,20 @@ import sys
 
 players_list = constants.PLAYERS
 teams_list = constants.TEAMS
-# clean data: remove 'and'; height to int; experience boolean
+# clean data: remove "and"; height to int; experience boolean
 def players_stats():
     player_info = {}
     for items in players_list:
-        if items['experience'] == 'YES':
-            items['experience'] = 'TRUE'
-        elif items['experience'] == 'NO':
-            items['experience'] = 'FALSE'
-        feet = items['height']
+        if items["experience"] == "YES":
+            items["experience"] = "TRUE"
+        elif items["experience"] == "NO":
+            items["experience"] = "FALSE"
+        feet = items["height"]
         feet_str = feet.split()
-        items['height'] = int(feet_str[0])
-        keeper = items['guardians']
-        keeper_str = keeper.replace('and','')
-        items['guardians'] = keeper_str.replace('and','')
+        items["height"] = int(feet_str[0])
+        keeper = items["guardians"]
+        keeper_str = keeper.replace("and","")
+        items["guardians"] = keeper_str.replace("and","")
         player_info.update(items)
         print(player_info)
     return(player_info)
@@ -32,7 +32,7 @@ if __name__ == "__main__":
         count = 0
         for team in teams_list:
             count += 1
-            print(count,')' ,team)
+            print(count,")" ,team)
     elif menu_opt == 2:
         sys.exit()
 # Sub-menu
