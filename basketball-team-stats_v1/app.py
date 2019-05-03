@@ -13,7 +13,7 @@ def players_stats():
             items['experience'] = 'FALSE'
         feet = items['height']
         feet_str = feet.split()
-        items['height'] = feet_str[0]
+        items['height'] = int(feet_str[0])
         keeper = items['guardians']
         keeper_str = keeper.replace('and','')
         items['guardians'] = keeper_str.replace('and','')
