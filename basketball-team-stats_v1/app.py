@@ -3,8 +3,9 @@ import sys
 
 players_list = constants.PLAYERS
 teams_list = constants.TEAMS
+
+if __name__ == "__main__":
 # clean data: remove "and"; height to int; experience boolean
-def players_stats():
     player_info = {}
     for items in players_list:
         if items["experience"] == "YES":
@@ -19,9 +20,7 @@ def players_stats():
         items["guardians"] = keeper_str.replace("and","")
         player_info.update(items)
         print(player_info)
-    return(player_info)
 
-if __name__ == "__main__":
     print("BASKETBALL TEAM STATS TOOL\n")
     print("----MENU---\n")
 
@@ -36,7 +35,11 @@ if __name__ == "__main__":
     elif menu_opt == 2:
         sys.exit()
 # Sub-menu
-        team_opt = int(input("Enter an option: "))
+    team_opt = int(input("Enter an option: "))
+
+    if team_opt == 1:
+        for items in player_info:
+            items['name']
 
 # Display number of players: team balancing
         #if team_opt == 1:
