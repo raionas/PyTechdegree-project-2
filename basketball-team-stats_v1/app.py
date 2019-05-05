@@ -1,25 +1,24 @@
 import constants
 import sys
 
-players_list = constants.PLAYERS
+players = constants.PLAYERS
 teams_list = constants.TEAMS
+players_list = players[:]
 
 if __name__ == "__main__":
 # clean data: remove "and"; height to int; experience boolean
-    player_info = {}
     for items in players_list:
         if items["experience"] == "YES":
-            items["experience"] = "TRUE"
+            items["experience"] = True
         elif items["experience"] == "NO":
-            items["experience"] = "FALSE"
+            items["experience"] = False
         feet = items["height"]
         feet_str = feet.split()
         items["height"] = int(feet_str[0])
         keeper = items["guardians"]
-        keeper_str = keeper.replace("and","")
-        items["guardians"] = keeper_str.replace("and","")
-        player_info.update(items)
-        print(player_info)
+        keeper_str = keeper.split("and")
+        items["guardians"] = keeper_str
+    print(players_list)
 
     print("BASKETBALL TEAM STATS TOOL\n")
     print("----MENU---\n")
@@ -42,9 +41,9 @@ if __name__ == "__main__":
     team_3 = []
     def team_stats(team):
         while True:
-            for key,value in player_info.items():
+            for key,value in players_list:
                 for name in key:
-                    if key == "name" and len(player_info.keys()) > 0:
+                    if key == "name":
                         team_1.append(value)
                         team_2.append(value)
                         team_3.append(value)
