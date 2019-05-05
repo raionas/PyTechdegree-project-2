@@ -37,6 +37,17 @@ if __name__ == "__main__":
 # Sub-menu
 # Team balancing
     team_opt = int(input("Enter an option: "))
+    skilled = []
+    not_skilled = []
+
+    for skill in players_list:
+        if skill['experience'] == True:
+            skilled.append(skill['name'])
+
+    for skill in players_list:
+        if skill['experience'] == False:
+            not_skilled.append(skill['name'])
+
     team_1 = []
     team_2 = []
     team_3 = []
