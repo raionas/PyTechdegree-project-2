@@ -1,9 +1,10 @@
 import constants
 import sys
+from copy import deepcopy
 
 players = constants.PLAYERS
 teams_list = constants.TEAMS
-players_list = players[:]
+players_list = deepcopy(players)
 
 if __name__ == "__main__":
 # clean data: remove "and"; height to int; experience boolean
