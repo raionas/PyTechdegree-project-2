@@ -16,7 +16,7 @@ if __name__ == "__main__":
         feet_str = feet.split()
         items["height"] = int(feet_str[0])
         keeper = items["guardians"]
-        keeper_str = keeper.split("and")
+        keeper_str = keeper.split(" and ")
         items["guardians"] = keeper_str
     print(players_list)
 
