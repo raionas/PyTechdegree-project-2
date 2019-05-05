@@ -43,14 +43,9 @@ if __name__ == "__main__":
     for skill in players_list:
         if skill['experience'] == True:
             skilled.append(skill['name'])
-
-    for skill in players_list:
-        if skill['experience'] == False:
+        elif skill['experience'] == False:
             not_skilled.append(skill['name'])
 
-    team_1 = []
-    team_2 = []
-    team_3 = []
     def team_stats(team):
         while True:
             for key,value in players_list:
