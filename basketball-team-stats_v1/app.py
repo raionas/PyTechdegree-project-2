@@ -35,6 +35,7 @@ if __name__ == "__main__":
     elif menu_opt == 2:
         sys.exit()
 # Sub-menu
+# Team balancing
     team_opt = int(input("Enter an option: "))
     team_1 = []
     team_2 = []
@@ -42,13 +43,15 @@ if __name__ == "__main__":
     def team_stats(team):
         while True:
             for key,value in player_info.items():
-                if key == 'name':
-                    team_1.append(value)
-                    team_2.append(value)
-                    team_3.append(value)
+                for name in key:
+                    if key == "name" and len(player_info.keys()) > 0:
+                        team_1.append(value)
+                        team_2.append(value)
+                        team_3.append(value)
+                        print(count)
             return(team)
 
-# Display number of players: team balancing
+# Display number of players
     if team_opt == 1:
         len(team_1)
         team_stats(team_1)
