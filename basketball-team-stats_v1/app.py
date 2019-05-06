@@ -46,22 +46,16 @@ if __name__ == "__main__":
         elif skill['experience'] == False:
             not_skilled.append(skill)
 # Team balancing
-while len(skilled) % 3 == 0:
-    Panthers = skilled[0:3] + not_skilled[0:3]
-    Bandits = skilled[3:6] + not_skilled[3:6]
-    Warriors = skilled[6:9] + skilled[6:9]
-
-    for items in skilled:
-        team_1.append(items['name'])
-        team_2.append(items['name'])
-        team_3.append(items['name'])
+    while len(skilled) % len(not_skilled) != 0:
+        Panthers = skilled[0:3] + not_skilled[0:3]
+        Bandits = skilled[3:6] + not_skilled[3:6]
+        Warriors = skilled[6:9] + skilled[6:9]
 
 # Display number of players
+    def roster():
+    for items in Panthers:
+        ",".join(items['name'])
+
     if team_opt == 1:
-        len(team_1)
-        team_stats(team_1)
-    if team_opt == 2:
-        team_stats(team_2)
-    if team_opt == 3:
-        team_stats(team_3)
+
 # Display players in team
