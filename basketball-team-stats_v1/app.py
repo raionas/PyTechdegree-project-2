@@ -35,27 +35,26 @@ if __name__ == "__main__":
     elif menu_opt == 2:
         sys.exit()
 # Sub-menu
-# Team balancing
+# Team division
     team_opt = int(input("Enter an option: "))
     skilled = []
     not_skilled = []
 
     for skill in players_list:
         if skill['experience'] == True:
-            skilled.append(skill['name'])
+            skilled.append(skill)
         elif skill['experience'] == False:
-            not_skilled.append(skill['name'])
+            not_skilled.append(skill)
+# Team balancing
+while len(skilled) % 3 == 0:
+    Panthers = skilled[0:3] + not_skilled[0:3]
+    Bandits = skilled[3:6] + not_skilled[3:6]
+    Warriors = skilled[6:9] + skilled[6:9]
 
-    def team_stats(team):
-        while True:
-            for key,value in players_list:
-                for name in key:
-                    if key == "name":
-                        team_1.append(value)
-                        team_2.append(value)
-                        team_3.append(value)
-                        print(count)
-            return(team)
+    for items in skilled:
+        team_1.append(items['name'])
+        team_2.append(items['name'])
+        team_3.append(items['name'])
 
 # Display number of players
     if team_opt == 1:
