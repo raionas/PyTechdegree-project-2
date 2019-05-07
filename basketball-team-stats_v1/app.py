@@ -39,10 +39,11 @@ if __name__ == "__main__":
 
     def team_stats():
         while True:
+        # Main Menu
             print("BASKETBALL TEAM STATS TOOL\n")
             print("----MENU---\nHere are your choices:\n1) Display Team Stats\n2) Quit\n")
             menu_opt = int(input("Enter an option: "))
-# Main Menu
+
             if menu_opt == 1:
                 count = 0
                 for team in teams_list:
@@ -50,13 +51,11 @@ if __name__ == "__main__":
                     print(count,")" ,team)
             elif menu_opt == 2:
                 sys.exit()
-# Sub-menu
-# Team division
+        # Sub-menu
             team_opt = int(input("Enter an option: "))
             # Now to use it... (somewhere else in Dunder Main)
+            # Team balancing
             skilled, not_skilled = divide_experienced(players_list)
-
-        # Team balancing
             if len(skilled) % len(not_skilled) == 0:
                 Panthers = skilled[0:3] + not_skilled[0:3]
                 Bandits = skilled[3:6] + not_skilled[3:6]
