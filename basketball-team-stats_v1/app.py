@@ -58,6 +58,7 @@ if __name__ == "__main__":
 
             except ValueError:
                 print("{}, That's an invalid input.\nPlease Enter a NUMBER only from the MENU.".format(main_menu))
+
             # Sub-menu
             sub_menu = input("Enter an option: ")
             try:
@@ -86,7 +87,6 @@ if __name__ == "__main__":
 
                 elif team_opt == 3:
                     roster3 = []
-
                     print("Team: {} Stats\n{}\nTotal Players: {}".format("Bandits", "-" * len("Team: Bandits Stats"),len(Bandits)))
                     for items in Warriors:
                         roster3.append(items["name"])
@@ -102,5 +102,5 @@ if __name__ == "__main__":
                 print("{}, That's an invalid input.\nPlease Enter a NUMBER only from the MENU.".format(sub_menu))
 
             input("\nPress ENTER to continue...")
-        return
+        #return
     team_stats()
