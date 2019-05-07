@@ -66,19 +66,19 @@ if __name__ == "__main__":
                 roster1 = []
                 for items in Panthers:
                     roster1.append(items["name"])
-                print("Players on Team:\n  {}".format(roster1))
+                print("Players on Team:\n  {}".format(", ".join(roster1)))
             elif team_opt == 2:
                 print("Team: {} Stats\n{}\nTotal Players: {}".format("Bandits", "-" * len("Team: Bandits Stats"),len(Bandits)))
                 roster2 = []
                 for items in Bandits:
                     roster2.append(items["name"])
-                print("Players on Team:\n  {}".format(roster2))
+                print("Players on Team:\n   {}".format(", ".join(roster2)))
             elif team_opt == 3:
                 print("Team: {} Stats\n{}\nTotal Players: {}".format("Bandits", "-" * len("Team: Bandits Stats"),len(Bandits)))
                 roster3 = []
                 for items in Warriors:
                     roster3.append(items["name"])
-                print("Players on Team:\n  {}".format(roster3))
+                print("Players on Team:\n   {}".format(", ".join(roster3)))
 
             else:
                 print("Your input of {} is invalid. Please enter only the available options.".format(team_opt))
@@ -86,4 +86,4 @@ if __name__ == "__main__":
             input("\nPress ENTER to continue...")
         return
 
-    team_stats()
+    #team_stats()
