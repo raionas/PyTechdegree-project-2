@@ -40,7 +40,7 @@ if __name__ == "__main__":
     def team_stats():
         while True:
         # Main Menu
-            print("BASKETBALL TEAM STATS TOOL\n")
+            print("\n\nBASKETBALL TEAM STATS TOOL\n")
             print("----MENU---\nHere are your choices:\n1) Display Team Stats\n2) Quit\n")
             menu_opt = int(input("Enter an option: "))
 
@@ -89,5 +89,9 @@ if __name__ == "__main__":
 
             input("\nPress ENTER to continue...")
         return
+
+        for items in Warriors:
+            if items['experience'] == True:
+                print("\nTotal Experienced Players: {}".format(len(items['name'])))
 
     #team_stats()
