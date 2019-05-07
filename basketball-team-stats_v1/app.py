@@ -84,14 +84,10 @@ if __name__ == "__main__":
                     roster3.append(items["name"])
                 print("Players on Team:\n   {}".format(", ".join(roster3)))
 
-                for items in Warriors:
-                    if items['experience'] == True:
-                        print("\nTotal Experienced Players: {}".format(len(items['name']))
+            else:
+                print("Your input of {} is invalid.\nPlease enter only the available options.".format(team_opt))
 
-            # else:
-            #     print("Your input of {} is invalid.\nPlease enter only the available options.".format(team_opt))
-
-            input("Press ENTER to continue...")
+            input("\nPress ENTER to continue...")
         return
 
     #team_stats()
