@@ -70,6 +70,7 @@ if __name__ == "__main__":
                     Panthers = skilled[0:3] + not_skilled[0:3]
                     Bandits = skilled[3:6] + not_skilled[3:6]
                     Warriors = skilled[6:9] + not_skilled[6:9]
+
                 # Displaying Stats
                 if team_opt == 1:
                     roster1 = []
@@ -87,16 +88,22 @@ if __name__ == "__main__":
 
                 elif team_opt == 3:
                     roster3 = []
+                    seasoned = []
                     print("Team: {} Stats\n{}\nTotal Players: {}".format("Bandits", "-" * len("Team: Bandits Stats"),len(Bandits)))
                     for items in Warriors:
                         roster3.append(items["name"])
                     print("Players on Team:\n   {}".format(", ".join(roster3)))
-                    if items['experience'] == True:
-                        print("\nTotal Experienced Players: {}".format(len(items['name'])))
 
                 else:
                     if team_opt == 0 or team_opt > 3:
                         print("{}, is not available from the MENU.\nPlease ENTER only the available options (1-3).".format(sub_menu))
+
+                 # counting experienced palyers
+                 # def seasoned_players():
+                 # seasoned = []
+                 #     if items['experience'] == True:
+                 #         seasoned.append[items["name"]]
+                 #         print("Total Experienced Players: {}".format(len(seasoned))
 
             except (ValueError):
                 print("{}, That's an invalid input.\nPlease Enter a NUMBER only from the MENU.".format(sub_menu))
