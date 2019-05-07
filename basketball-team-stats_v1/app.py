@@ -8,6 +8,20 @@ players_list = deepcopy(players)
 skilled = []
 not_skilled = []
 
+# clean data: remove "and"; height to int; experience boolean
+for items in players_list:
+    if items["experience"] == "YES":
+        items["experience"] = True
+    elif items["experience"] == "NO":
+        items["experience"] = False
+    feet = items["height"]
+    feet_str = feet.split()
+    items["height"] = int(feet_str[0])
+    keeper = items["guardians"]
+    keeper_str = keeper.split(" and ")
+    items["guardians"] = keeper_str
+print("\nTotal Players: ", len(players_list))
+
 def divide_experienced(all_players):
 # Accept all_players as an argument which should be ALL 18 players.
 
@@ -23,28 +37,14 @@ def divide_experienced(all_players):
     return skilled, not_skilled
 
 if __name__ == "__main__":
-# clean data: remove "and"; height to int; experience boolean
-    for items in players_list:
-        if items["experience"] == "YES":
-            items["experience"] = True
-        elif items["experience"] == "NO":
-            items["experience"] = False
-        feet = items["height"]
-        feet_str = feet.split()
-        items["height"] = int(feet_str[0])
-        keeper = items["guardians"]
-        keeper_str = keeper.split(" and ")
-        items["guardians"] = keeper_str
-    print("\nTotal Players: ", len(players_list))
-
     def team_stats():
         while True:
-        # Main Menu
+            # Main Menu
+            print("\n\nBASKETBALL TEAM STATS TOOL\n")
+            print("----MENU---\nHere are your choices:\n1) Display Team Stats\n2) Quit\n")
+            main_menu = input("Enter an option: ")
             try:
-                print("\n\nBASKETBALL TEAM STATS TOOL\n")
-                print("----MENU---\nHere are your choices:\n1) Display Team Stats\n2) Quit\n")
-                menu_opt = int(input("Enter an option: "))
-
+                menu_opt = int(main_menu)
                 if menu_opt == 1:
                     count = 0
                     for team in teams_list:
@@ -52,12 +52,16 @@ if __name__ == "__main__":
                         print(count,")" ,team)
                 elif menu_opt == 2:
                     sys.exit()
+                else:
+                    if menu_opt == 0 or menu_opt > 2:
+                        print("{}, is not available from the MENU.\nPlease ENTER only the available options (1-2).".format(main_menu))
 
             except ValueError:
-                print("{}, That's an invalid input.\nPlease Enter a NUMBER only from the MENU.".format(menu_opt))
+                print("{}, That's an invalid input.\nPlease Enter a NUMBER only from the MENU.".format(main_menu))
             # Sub-menu
+            sub_menu = input("Enter an option: ")
             try:
-                team_opt = int(input("Enter an option: "))
+                team_opt = int(sub_menu)
                 # Now to use it... (somewhere else in Dunder Main)
                 # Team balancing
                 skilled, not_skilled = divide_experienced(players_list)
@@ -65,7 +69,7 @@ if __name__ == "__main__":
                     Panthers = skilled[0:3] + not_skilled[0:3]
                     Bandits = skilled[3:6] + not_skilled[3:6]
                     Warriors = skilled[6:9] + not_skilled[6:9]
-            # Displaying Stats
+                # Displaying Stats
                 if team_opt == 1:
                     roster1 = []
                     print("Team: {} Stats\n{}\nTotal Players: {}".format("Panthers", "-" * len("Team: Panthers Stats"),len(Warriors)))
@@ -90,11 +94,12 @@ if __name__ == "__main__":
                     if items['experience'] == True:
                         print("\nTotal Experienced Players: {}".format(len(items['name'])))
 
-                # else:
-                #     print("{}, That's an invalid input.\nPlease enter only the available options.".format(team_opt))
+                else:
+                    if team_opt == 0 or team_opt > 3:
+                        print("{}, is not available from the MENU.\nPlease ENTER only the available options (1-3).".format(sub_menu))
 
             except (ValueError):
-                print("{}, That's an invalid input.\nPlease Enter a NUMBER only from the MENU.".format(team_opt))
+                print("{}, That's an invalid input.\nPlease Enter a NUMBER only from the MENU.".format(sub_menu))
 
             input("\nPress ENTER to continue...")
         return
