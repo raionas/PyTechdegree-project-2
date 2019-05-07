@@ -40,55 +40,62 @@ if __name__ == "__main__":
     def team_stats():
         while True:
         # Main Menu
-            print("\n\nBASKETBALL TEAM STATS TOOL\n")
-            print("----MENU---\nHere are your choices:\n1) Display Team Stats\n2) Quit\n")
-            menu_opt = int(input("Enter an option: "))
+            try:
+                print("\n\nBASKETBALL TEAM STATS TOOL\n")
+                print("----MENU---\nHere are your choices:\n1) Display Team Stats\n2) Quit\n")
+                menu_opt = int(input("Enter an option: "))
 
-            if menu_opt == 1:
-                count = 0
-                for team in teams_list:
-                    count += 1
-                    print(count,")" ,team)
-            elif menu_opt == 2:
-                sys.exit()
-        # Sub-menu
-            team_opt = int(input("Enter an option: "))
-            # Now to use it... (somewhere else in Dunder Main)
-            # Team balancing
-            skilled, not_skilled = divide_experienced(players_list)
-            if len(skilled) % len(not_skilled) == 0:
-                Panthers = skilled[0:3] + not_skilled[0:3]
-                Bandits = skilled[3:6] + not_skilled[3:6]
-                Warriors = skilled[6:9] + not_skilled[6:9]
-        # Displaying Stats
-            if team_opt == 1:
-                roster1 = []
-                print("Team: {} Stats\n{}\nTotal Players: {}".format("Panthers", "-" * len("Team: Panthers Stats"),len(Warriors)))
-                for items in Panthers:
-                    roster1.append(items["name"])
-                print("Players on Team:\n  {}".format(", ".join(roster1)))
+                if menu_opt == 1:
+                    count = 0
+                    for team in teams_list:
+                        count += 1
+                        print(count,")" ,team)
+                elif menu_opt == 2:
+                    sys.exit()
 
-            elif team_opt == 2:
-                roster2 = []
-                print("Team: {} Stats\n{}\nTotal Players: {}".format("Bandits", "-" * len("Team: Bandits Stats"),len(Bandits)))
-                for items in Bandits:
-                    roster2.append(items["name"])
-                print("Players on Team:\n   {}".format(", ".join(roster2)))
+            except ValueError:
+                print("{}, That's an invalid input.\nPlease Enter a NUMBER only from the MENU.".format(menu_opt))
+            # Sub-menu
+            try:
+                team_opt = int(input("Enter an option: "))
+                # Now to use it... (somewhere else in Dunder Main)
+                # Team balancing
+                skilled, not_skilled = divide_experienced(players_list)
+                if len(skilled) % len(not_skilled) == 0:
+                    Panthers = skilled[0:3] + not_skilled[0:3]
+                    Bandits = skilled[3:6] + not_skilled[3:6]
+                    Warriors = skilled[6:9] + not_skilled[6:9]
+            # Displaying Stats
+                if team_opt == 1:
+                    roster1 = []
+                    print("Team: {} Stats\n{}\nTotal Players: {}".format("Panthers", "-" * len("Team: Panthers Stats"),len(Warriors)))
+                    for items in Panthers:
+                        roster1.append(items["name"])
+                    print("Players on Team:\n  {}".format(", ".join(roster1)))
 
-            elif team_opt == 3:
-                roster3 = []
-                experience3 = []
+                elif team_opt == 2:
+                    roster2 = []
+                    print("Team: {} Stats\n{}\nTotal Players: {}".format("Bandits", "-" * len("Team: Bandits Stats"),len(Bandits)))
+                    for items in Bandits:
+                        roster2.append(items["name"])
+                    print("Players on Team:\n   {}".format(", ".join(roster2)))
 
-                print("Team: {} Stats\n{}\nTotal Players: {}".format("Bandits", "-" * len("Team: Bandits Stats"),len(Bandits)))
-                for items in Warriors:
-                    roster3.append(items["name"])
-                print("Players on Team:\n   {}".format(", ".join(roster3)))
-                if items['experience'] == True:
-                    print("\nTotal Experienced Players: {}".format(len(items['name'])))
+                elif team_opt == 3:
+                    roster3 = []
 
-            else:
-                print("Your input of {} is invalid.\nPlease enter only the available options.".format(team_opt))
+                    print("Team: {} Stats\n{}\nTotal Players: {}".format("Bandits", "-" * len("Team: Bandits Stats"),len(Bandits)))
+                    for items in Warriors:
+                        roster3.append(items["name"])
+                    print("Players on Team:\n   {}".format(", ".join(roster3)))
+                    if items['experience'] == True:
+                        print("\nTotal Experienced Players: {}".format(len(items['name'])))
+
+                # else:
+                #     print("{}, That's an invalid input.\nPlease enter only the available options.".format(team_opt))
+
+            except (ValueError):
+                print("{}, That's an invalid input.\nPlease Enter a NUMBER only from the MENU.".format(team_opt))
 
             input("\nPress ENTER to continue...")
         return
-    #team_stats()
+    team_stats()
