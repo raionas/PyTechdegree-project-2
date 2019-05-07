@@ -85,4 +85,6 @@ if __name__ == "__main__":
                 print("Your input of {} is invalid. Please enter only the available options.".format(team_opt))
 
             input("\nPress ENTER to continue...")
-        return 
+        return
+
+    team_stats()
