@@ -62,28 +62,36 @@ if __name__ == "__main__":
                 Warriors = skilled[6:9] + not_skilled[6:9]
         # Displaying Stats
             if team_opt == 1:
-                print("Team: {} Stats\n{}\nTotal Players: {}".format("Panthers", "-" * len("Team: Panthers Stats"),len(Warriors)))
                 roster1 = []
+                print("Team: {} Stats\n{}\nTotal Players: {}".format("Panthers", "-" * len("Team: Panthers Stats"),len(Warriors)))
                 for items in Panthers:
                     roster1.append(items["name"])
                 print("Players on Team:\n  {}".format(", ".join(roster1)))
+
             elif team_opt == 2:
-                print("Team: {} Stats\n{}\nTotal Players: {}".format("Bandits", "-" * len("Team: Bandits Stats"),len(Bandits)))
                 roster2 = []
+                print("Team: {} Stats\n{}\nTotal Players: {}".format("Bandits", "-" * len("Team: Bandits Stats"),len(Bandits)))
                 for items in Bandits:
                     roster2.append(items["name"])
                 print("Players on Team:\n   {}".format(", ".join(roster2)))
+
             elif team_opt == 3:
-                print("Team: {} Stats\n{}\nTotal Players: {}".format("Bandits", "-" * len("Team: Bandits Stats"),len(Bandits)))
                 roster3 = []
+                experience3 = []
+
+                print("Team: {} Stats\n{}\nTotal Players: {}".format("Bandits", "-" * len("Team: Bandits Stats"),len(Bandits)))
                 for items in Warriors:
                     roster3.append(items["name"])
                 print("Players on Team:\n   {}".format(", ".join(roster3)))
 
-            else:
-                print("Your input of {} is invalid. Please enter only the available options.".format(team_opt))
+                for items in Warriors:
+                    if items['experience'] == True:
+                        print("\nTotal Experienced Players: {}".format(len(items['name']))
 
-            input("\nPress ENTER to continue...")
+            # else:
+            #     print("Your input of {} is invalid.\nPlease enter only the available options.".format(team_opt))
+
+            input("Press ENTER to continue...")
         return
 
     #team_stats()
