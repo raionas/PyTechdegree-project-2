@@ -5,6 +5,22 @@ from copy import deepcopy
 players = constants.PLAYERS
 teams_list = constants.TEAMS
 players_list = deepcopy(players)
+skilled = []
+not_skilled = []
+
+def divide_experienced(all_players):
+# Accept all_players as an argument which should be ALL 18 players.
+
+# ... now run your logic here...
+    for skill in players_list:
+        if skill['experience'] == True:
+            skilled.append(skill)
+        elif skill['experience'] == False:
+            not_skilled.append(skill)
+    print("Skilled: ", len(skilled))
+    print("Not Skilled: ", len(not_skilled))
+# Then you could return a 2-item Tuple each containing a List.
+    return skilled, not_skilled
 
 if __name__ == "__main__":
 # clean data: remove "and"; height to int; experience boolean
@@ -19,43 +35,54 @@ if __name__ == "__main__":
         keeper = items["guardians"]
         keeper_str = keeper.split(" and ")
         items["guardians"] = keeper_str
-    print(players_list)
+    print("\nTotal Players: ", len(players_list))
 
-    print("BASKETBALL TEAM STATS TOOL\n")
-    print("----MENU---\n")
-
-    print("Here are your choices:\n1) Display Team Stats\n2) Quit\n")
-    menu_opt = int(input("Enter an option: "))
+    def team_stats():
+        while True:
+            print("BASKETBALL TEAM STATS TOOL\n")
+            print("----MENU---\nHere are your choices:\n1) Display Team Stats\n2) Quit\n")
+            menu_opt = int(input("Enter an option: "))
 # Main Menu
-    if menu_opt == 1:
-        count = 0
-        for team in teams_list:
-            count += 1
-            print(count,")" ,team)
-    elif menu_opt == 2:
-        sys.exit()
+            if menu_opt == 1:
+                count = 0
+                for team in teams_list:
+                    count += 1
+                    print(count,")" ,team)
+            elif menu_opt == 2:
+                sys.exit()
 # Sub-menu
 # Team division
-    team_opt = int(input("Enter an option: "))
-    skilled = []
-    not_skilled = []
+            team_opt = int(input("Enter an option: "))
+            # Now to use it... (somewhere else in Dunder Main)
+            skilled, not_skilled = divide_experienced(players_list)
 
-    for skill in players_list:
-        if skill['experience'] == True:
-            skilled.append(skill)
-        elif skill['experience'] == False:
-            not_skilled.append(skill)
-# Team balancing
-    while len(skilled) % len(not_skilled) != 0:
-        Panthers = skilled[0:3] + not_skilled[0:3]
-        Bandits = skilled[3:6] + not_skilled[3:6]
-        Warriors = skilled[6:9] + skilled[6:9]
+        # Team balancing
+            if len(skilled) % len(not_skilled) == 0:
+                Panthers = skilled[0:3] + not_skilled[0:3]
+                Bandits = skilled[3:6] + not_skilled[3:6]
+                Warriors = skilled[6:9] + not_skilled[6:9]
+        # Displaying Stats
+            if team_opt == 1:
+                print("Team: {} Stats\n{}\nTotal Players: {}".format("Panthers", "-" * len("Team: Panthers Stats"),len(Warriors)))
+                roster1 = []
+                for items in Panthers:
+                    roster1.append(items["name"])
+                print("Players on Team:\n  {}".format(roster1))
+            elif team_opt == 2:
+                print("Team: {} Stats\n{}\nTotal Players: {}".format("Bandits", "-" * len("Team: Bandits Stats"),len(Bandits)))
+                roster2 = []
+                for items in Bandits:
+                    roster2.append(items["name"])
+                print("Players on Team:\n  {}".format(roster2))
+            elif team_opt == 3:
+                print("Team: {} Stats\n{}\nTotal Players: {}".format("Bandits", "-" * len("Team: Bandits Stats"),len(Bandits)))
+                roster3 = []
+                for items in Warriors:
+                    roster3.append(items["name"])
+                print("Players on Team:\n  {}".format(roster3))
 
-# Display number of players
-    def roster():
-    for items in Panthers:
-        ",".join(items['name'])
+            else:
+                print("Your input of {} is invalid. Please enter only the available options.".format(team_opt))
 
-    if team_opt == 1:
-
-# Display players in team
+            input("\nPress ENTER to continue...")
+        return 
