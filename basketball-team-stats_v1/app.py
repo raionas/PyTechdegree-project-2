@@ -31,8 +31,8 @@ def divide_experienced(all_players):
             skilled.append(skill)
         elif skill['experience'] == False:
             not_skilled.append(skill)
-    print("Skilled: ", len(skilled))
-    print("Not Skilled: ", len(not_skilled))
+    #print("Skilled: ", len(skilled))
+    #print("Not Skilled: ", len(not_skilled))
 # Then you could return a 2-item Tuple each containing a List.
     return skilled, not_skilled
 
@@ -89,6 +89,7 @@ def team_stats():
                 roster3 = []
                 seasoned_warriors = []
                 not_seasoned_wars = []
+
                 print("Team: {} Stats\n{}\nTotal Players: {}".format("Bandits", "-" * len("Team: Bandits Stats"),len(Bandits)))
                 for items in Warriors:
                     roster3.append(items["name"])
@@ -102,8 +103,14 @@ def team_stats():
                 print("    Total Experienced Players: {}".format(len(seasoned_warriors)))
                 print("    Total Inexperienced Players: {}".format(len(not_seasoned_wars)))
 
-                warriors_avg_ht = sum(items["height"] for items in Warriors)
+                # Compute for average height
+                warriors_sum_ht = sum(items["height"] for items in Warriors)
+                warriors_avg_ht = warriors_sum_ht / len(roster3)
                 print("      The average height for the Warriors Team is: {} inches".format(warriors_avg_ht))
+                # Know their Guardians
+                warriors_keepers = (str(items["guardians"]) for items in Warriors)
+                #print(type(warriors_keepers))
+                print("      The Warriors Guardians: {}".format(", ".join(warriors_keepers)))
 
             else:
                 if team_opt == 0 or team_opt > 3:
@@ -114,9 +121,6 @@ def team_stats():
 
         input("\nPress ENTER to continue...")
     #return
-
-
-
 if __name__ == "__main__":
     try:
         team_stats()
