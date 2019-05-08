@@ -8,7 +8,6 @@ players_list = deepcopy(players)
 skilled = []
 not_skilled = []
 
-# clean data: remove "and"; height to int; experience boolean
 for items in players_list:
     if items["experience"] == "YES":
         items["experience"] = True
@@ -23,22 +22,15 @@ for items in players_list:
 print("\nTotal Players: ", len(players_list))
 
 def divide_experienced(all_players):
-# Accept all_players as an argument which should be ALL 18 players.
-
-# ... now run your logic here...
     for skill in players_list:
         if skill['experience'] == True:
             skilled.append(skill)
         elif skill['experience'] == False:
             not_skilled.append(skill)
-    #print("Skilled: ", len(skilled))
-    #print("Not Skilled: ", len(not_skilled))
-# Then you could return a 2-item Tuple each containing a List.
     return skilled, not_skilled
 
 def team_stats():
     while True:
-        # Main Menu
         print("\n\nBASKETBALL TEAM STATS TOOL\n")
         print("----MENU---\nHere are your choices:\n1) Display Team Stats\n2) Quit\n")
         main_menu = input("Enter an option: ")
@@ -58,19 +50,16 @@ def team_stats():
         except ValueError:
             print("{}, That's an invalid input.\nPlease Enter a NUMBER only from the MENU.".format(main_menu))
 
-        # Sub-menu
         sub_menu = input("Enter an option: ")
         try:
             team_opt = int(sub_menu)
-            # Now to use it... (somewhere else in Dunder Main)
-            # Team balancing
+
             skilled, not_skilled = divide_experienced(players_list)
             if len(skilled) % len(not_skilled) == 0:
                 Panthers = skilled[0:3] + not_skilled[0:3]
                 Bandits = skilled[3:6] + not_skilled[3:6]
                 Warriors = skilled[6:9] + not_skilled[6:9]
 
-            # Displaying Stats
             if team_opt == 1:
                 roster1 = []
                 seasoned_panthers = []
@@ -85,6 +74,7 @@ def team_stats():
                     if items["experience"] == False:
                         not_seasoned_panthers.append(items["name"])
                     panthers_keepers.extend(items["guardians"])
+
                 panthers_sum_ht = sum(items["height"] for items in Panthers)
                 panthers_avg_ht = int(panthers_sum_ht / len(roster1))
 
@@ -108,6 +98,7 @@ def team_stats():
                     if items["experience"] == False:
                         not_seasoned_bandits.append(items["name"])
                     bandits_keepers.extend(items["guardians"])
+
                 bandits_sum_ht = sum(items["height"] for items in Bandits)
                 bandits_avg_ht = int(bandits_sum_ht / len(roster2))
 
@@ -126,24 +117,18 @@ def team_stats():
                 print("Team: {} Stats\n{}\nTotal Players: {}".format("Warriors", "-" * len("Team: Warriors Stats"),len(Bandits)))
                 for items in Warriors:
                     roster3.append(items["name"])
-                print("Players on Team:\n   {}".format(", ".join(roster3)))
-                 # counting experienced palyers
-                for items in Warriors:
                     if items["experience"] == True:
                         seasoned_warriors.append(items["name"])
                     if items["experience"] == False:
                         not_seasoned_wars.append(items["name"])
                     warriors_keepers.extend(items["guardians"])
+
+                warriors_sum_ht = sum(items["height"] for items in Warriors)
+                warriors_avg_ht = int(warriors_sum_ht / len(roster3))
+                print("Players on Team:\n   {}".format(", ".join(roster3)))
                 print("    Total Experienced Players: {}".format(len(seasoned_warriors)))
                 print("    Total Inexperienced Players: {}".format(len(not_seasoned_wars)))
-
-                # Compute for average height
-                warriors_sum_ht = sum(items["height"] for items in Warriors)
-                warriors_avg_ht = warriors_sum_ht / len(roster3)
                 print("      The average height for the Warriors Team is: {} inches".format(warriors_avg_ht))
-                # Know their Guardians
-                #warriors_keepers = (str(items["guardians"]) for items in Warriors)
-                #print(type(warriors_keepers))
                 print("      The Warriors Guardians: {}".format(", ".join(warriors_keepers)))
 
             else:
@@ -154,10 +139,9 @@ def team_stats():
             print("{}, That's an invalid input.\nPlease Enter a NUMBER only from the MENU.".format(sub_menu))
 
         input("\nPress ENTER to continue...")
-    #return
+
 if __name__ == "__main__":
     try:
         team_stats()
-        #seasoned_players()
     except SystemExit:
         print("Program Terminated. Bye!")
