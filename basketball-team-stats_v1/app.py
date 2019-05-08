@@ -73,24 +73,57 @@ def team_stats():
             # Displaying Stats
             if team_opt == 1:
                 roster1 = []
+                seasoned_panthers = []
+                not_seasoned_panthers = []
+                panthers_keepers = []
+
                 print("Team: {} Stats\n{}\nTotal Players: {}".format("Panthers", "-" * len("Team: Panthers Stats"),len(Warriors)))
                 for items in Panthers:
                     roster1.append(items["name"])
+                    if items["experience"] == True:
+                        seasoned_panthers.append(items["name"])
+                    if items["experience"] == False:
+                        not_seasoned_panthers.append(items["name"])
+                    panthers_keepers.extend(items["guardians"])
+                panthers_sum_ht = sum(items["height"] for items in Panthers)
+                panthers_avg_ht = int(panthers_sum_ht / len(roster1))
+
                 print("Players on Team:\n  {}".format(", ".join(roster1)))
+                print("    Total Experienced Players: {}".format(len(seasoned_panthers)))
+                print("    Total Inexperienced Players: {}".format(len(not_seasoned_panthers)))
+                print("      The average height for the Bandits Team is: {} inches".format(panthers_avg_ht))
+                print("      The Panthers Guardians: {}".format(", ".join(panthers_keepers)))
 
             elif team_opt == 2:
                 roster2 = []
+                seasoned_bandits = []
+                not_seasoned_bandits = []
+                bandits_keepers = []
+
                 print("Team: {} Stats\n{}\nTotal Players: {}".format("Bandits", "-" * len("Team: Bandits Stats"),len(Bandits)))
                 for items in Bandits:
                     roster2.append(items["name"])
+                    if items["experience"] == True:
+                        seasoned_bandits.append(items["name"])
+                    if items["experience"] == False:
+                        not_seasoned_bandits.append(items["name"])
+                    bandits_keepers.extend(items["guardians"])
+                bandits_sum_ht = sum(items["height"] for items in Bandits)
+                bandits_avg_ht = int(bandits_sum_ht / len(roster2))
+
                 print("Players on Team:\n   {}".format(", ".join(roster2)))
+                print("    Total Experienced Players: {}".format(len(seasoned_bandits)))
+                print("    Total Inexperienced Players: {}".format(len(not_seasoned_bandits)))
+                print("      The average height for the Bandits Team is: {} inches".format(bandits_avg_ht))
+                print("      The Bandits Guardians: {}".format(", ".join(bandits_keepers)))
 
             elif team_opt == 3:
                 roster3 = []
                 seasoned_warriors = []
                 not_seasoned_wars = []
+                warriors_keepers = []
 
-                print("Team: {} Stats\n{}\nTotal Players: {}".format("Bandits", "-" * len("Team: Bandits Stats"),len(Bandits)))
+                print("Team: {} Stats\n{}\nTotal Players: {}".format("Warriors", "-" * len("Team: Warriors Stats"),len(Bandits)))
                 for items in Warriors:
                     roster3.append(items["name"])
                 print("Players on Team:\n   {}".format(", ".join(roster3)))
@@ -100,6 +133,7 @@ def team_stats():
                         seasoned_warriors.append(items["name"])
                     if items["experience"] == False:
                         not_seasoned_wars.append(items["name"])
+                    warriors_keepers.extend(items["guardians"])
                 print("    Total Experienced Players: {}".format(len(seasoned_warriors)))
                 print("    Total Inexperienced Players: {}".format(len(not_seasoned_wars)))
 
@@ -108,7 +142,7 @@ def team_stats():
                 warriors_avg_ht = warriors_sum_ht / len(roster3)
                 print("      The average height for the Warriors Team is: {} inches".format(warriors_avg_ht))
                 # Know their Guardians
-                warriors_keepers = (str(items["guardians"]) for items in Warriors)
+                #warriors_keepers = (str(items["guardians"]) for items in Warriors)
                 #print(type(warriors_keepers))
                 print("      The Warriors Guardians: {}".format(", ".join(warriors_keepers)))
 
@@ -126,4 +160,4 @@ if __name__ == "__main__":
         team_stats()
         #seasoned_players()
     except SystemExit:
-        print("Program Terminated.")
+        print("Program Terminated. Bye!")
