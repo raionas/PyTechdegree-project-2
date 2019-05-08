@@ -87,23 +87,27 @@ def team_stats():
 
             elif team_opt == 3:
                 roster3 = []
-                seasoned = []
+                seasoned_warriors = []
+                not_seasoned_wars = []
                 print("Team: {} Stats\n{}\nTotal Players: {}".format("Bandits", "-" * len("Team: Bandits Stats"),len(Bandits)))
                 for items in Warriors:
                     roster3.append(items["name"])
                 print("Players on Team:\n   {}".format(", ".join(roster3)))
+                 # counting experienced palyers
+                for items in Warriors:
+                    if items["experience"] == True:
+                        seasoned_warriors.append(items["name"])
+                    if items["experience"] == False:
+                        not_seasoned_wars.append(items["name"])
+                print("    Total Experienced Players: {}".format(len(seasoned_warriors)))
+                print("    Total Inexperienced Players: {}".format(len(not_seasoned_wars)))
+
+                warriors_avg_ht = sum(items["height"] for items in Warriors)
+                print("      The average height for the Warriors Team is: {} inches".format(warriors_avg_ht))
 
             else:
                 if team_opt == 0 or team_opt > 3:
                     print("{}, is not available from the MENU.\nPlease ENTER only the available options (1-3).".format(sub_menu))
-
-             # counting experienced palyers
-            def seasoned_players():
-                seasoned = []
-                for items in Warriors:
-                    if items['experience'] == True:
-                        seasoned.append[items["name"]]
-                        print("Total Experienced Players: {}".format(len(seasoned)))
 
         except ValueError:
             print("{}, That's an invalid input.\nPlease Enter a NUMBER only from the MENU.".format(sub_menu))
@@ -111,9 +115,11 @@ def team_stats():
         input("\nPress ENTER to continue...")
     #return
 
+
+
 if __name__ == "__main__":
     try:
         team_stats()
-        seasoned_players()
+        #seasoned_players()
     except SystemExit:
         print("Program Terminated.")
