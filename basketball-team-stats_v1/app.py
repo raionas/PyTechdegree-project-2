@@ -1,6 +1,7 @@
 import constants
 import sys
 from copy import deepcopy
+from textwrap import dedent
 
 players = constants.PLAYERS
 teams_list = constants.TEAMS
@@ -19,7 +20,6 @@ for items in players_list:
     keeper = items["guardians"]
     keeper_str = keeper.split(" and ")
     items["guardians"] = keeper_str
-print("\nTotal Players: ", len(players_list))
 
 def divide_experienced(all_players):
     for skill in players_list:
@@ -40,7 +40,7 @@ def team_stats():
                 count = 0
                 for team in teams_list:
                     count += 1
-                    print(count,")" ,team)
+                    print(count,")",team)
             elif menu_opt == 2:
                 sys.exit()
             else:
@@ -50,7 +50,7 @@ def team_stats():
         except ValueError:
             print("{}, That's an invalid input.\nPlease Enter a NUMBER only from the MENU.".format(main_menu))
 
-        sub_menu = input("Enter an option: ")
+        sub_menu = input("Select a team (1-3): ")
         try:
             team_opt = int(sub_menu)
 
@@ -78,11 +78,25 @@ def team_stats():
                 panthers_sum_ht = sum(items["height"] for items in Panthers)
                 panthers_avg_ht = int(panthers_sum_ht / len(roster1))
 
-                print("Players on Team:\n  {}".format(", ".join(roster1)))
-                print("    Total Experienced Players: {}".format(len(seasoned_panthers)))
-                print("    Total Inexperienced Players: {}".format(len(not_seasoned_panthers)))
-                print("      The average height for the Bandits Team is: {} inches".format(panthers_avg_ht))
-                print("      The Panthers Guardians: {}".format(", ".join(panthers_keepers)))
+                stats_template = dedent("""
+                                 Players on Team: {}
+                                   Total Experienced Players: {}
+                                   Total Inexperienced Players: {}
+                                     The average height for the Bandits Team is: {}
+                                     The Panthers Guardians: {} """)
+
+                print(stats_template.format(
+                            ", ".join(roster1),
+                           len(seasoned_panthers),
+                           len(not_seasoned_panthers),
+                           panthers_avg_ht,
+                           panthers_keepers))
+
+                # print("Players on Team:\n  {}".format(", ".join(roster1)))
+                # print("    Total Experienced Players: {}".format(len(seasoned_panthers)))
+                # print("    Total Inexperienced Players: {}".format(len(not_seasoned_panthers)))
+                # print("      The average height for the Bandits Team is: {} inches".format(panthers_avg_ht))
+                # print("      The Panthers Guardians: {}".format(", ".join(panthers_keepers)))
 
             elif team_opt == 2:
                 roster2 = []
