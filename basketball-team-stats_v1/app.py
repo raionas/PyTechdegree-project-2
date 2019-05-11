@@ -68,6 +68,17 @@ def main_selection():
 def stats_menu(preferred):
     choice = main_selection()
     print("choice: {}".format(choice))
+
+    stats_template = dedent("""\
+                     Team: {} Stats
+                     {}
+                     Total Players: {}
+                     Players on Team: {}
+                       Total Experienced Players: {}
+                       Total Inexperienced Players: {}
+                         The average height for the Bandits Team is: {}
+                         The Panthers Guardians: {} """)
+
     skilled, not_skilled = divide_experienced(players_list)
     if len(skilled) % len(not_skilled) == 0:
         Panthers = skilled[0:3] + not_skilled[0:3]
@@ -91,16 +102,6 @@ def stats_menu(preferred):
         panthers_sum_ht = sum(items["height"] for items in Panthers)
         panthers_avg_ht = int(panthers_sum_ht / len(roster1))
 
-        stats_template = dedent("""\
-                         Team: {} Stats
-                         {}
-                         Total Players: {}
-                         Players on Team: {}
-                           Total Experienced Players: {}
-                           Total Inexperienced Players: {}
-                             The average height for the Bandits Team is: {}
-                             The Panthers Guardians: {} """)
-
         print(stats_template.format(
                     "Panthers",
                     "-" * len("Team: Panthers Stats"),
@@ -117,7 +118,6 @@ def stats_menu(preferred):
         not_seasoned_bandits = []
         bandits_keepers = []
 
-        print("Team: {} Stats\n{}\nTotal Players: {}".format("Bandits", "-" * len("Team: Bandits Stats"),len(Bandits)))
         for items in Bandits:
             roster2.append(items["name"])
             if items["experience"] == True:
@@ -129,34 +129,42 @@ def stats_menu(preferred):
         bandits_sum_ht = sum(items["height"] for items in Bandits)
         bandits_avg_ht = int(bandits_sum_ht / len(roster2))
 
-        print("Players on Team:\n   {}".format(", ".join(roster2)))
-        print("    Total Experienced Players: {}".format(len(seasoned_bandits)))
-        print("    Total Inexperienced Players: {}".format(len(not_seasoned_bandits)))
-        print("      The average height for the Bandits Team is: {} inches".format(bandits_avg_ht))
-        print("      The Bandits Guardians: {}".format(", ".join(bandits_keepers)))
+        print(stats_template.format(
+                    "Bandits",
+                    "-" * len("Team: Bandits Stats"),
+                    len(Bandits),
+                    ", ".join(roster2),
+                    len(seasoned_bandits),
+                    len(not_seasoned_bandits),
+                    bandits_avg_ht,
+                    ", ".join(bandits_keepers)))
 
     elif choice == 3:
         roster3 = []
         seasoned_warriors = []
-        not_seasoned_wars = []
+        not_seasoned_warriors = []
         warriors_keepers = []
 
-        print("Team: {} Stats\n{}\nTotal Players: {}".format("Warriors", "-" * len("Team: Warriors Stats"),len(Bandits)))
         for items in Warriors:
             roster3.append(items["name"])
             if items["experience"] == True:
                 seasoned_warriors.append(items["name"])
             if items["experience"] == False:
-                not_seasoned_wars.append(items["name"])
+                not_seasoned_warriors.append(items["name"])
             warriors_keepers.extend(items["guardians"])
 
         warriors_sum_ht = sum(items["height"] for items in Warriors)
         warriors_avg_ht = int(warriors_sum_ht / len(roster3))
-        print("Players on Team:\n   {}".format(", ".join(roster3)))
-        print("    Total Experienced Players: {}".format(len(seasoned_warriors)))
-        print("    Total Inexperienced Players: {}".format(len(not_seasoned_wars)))
-        print("      The average height for the Warriors Team is: {} inches".format(warriors_avg_ht))
-        print("      The Warriors Guardians: {}".format(", ".join(warriors_keepers)))
+
+        print(stats_template.format(
+                    "Warriors",
+                    "-" * len("Team: Warriors Stats"),
+                    len(Warriors),
+                    ", ".join(roster3),
+                    len(seasoned_warriors),
+                    len(not_seasoned_warriors),
+                    warriors_avg_ht,
+                    ", ".join(warriors_keepers)))
 
     return choice
 
@@ -165,7 +173,6 @@ if __name__ == "__main__":
     clean_data()
     try:
         while True:
-            #clean_data()
             #main_selection() # nothing catches the value
             stats_menu(main_selection)
             input("\nPress ENTER to continue...")
