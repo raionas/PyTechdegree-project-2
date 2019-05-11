@@ -45,19 +45,23 @@ def main_selection():
                     print(count,")",team)
             elif menu_opt == 2:
                 sys.exit()
-            else:
-                if menu_opt == 0 or menu_opt > 2:
+
+            elif menu_opt == 0 or menu_opt > 2:
                     print("{}, is not available from the MENU.\nPlease ENTER only the available options (1-2).".format(main_menu))
                     continue
 
         except ValueError:
             print("{}, That's an invalid input.\nPlease Enter a NUMBER only from the MENU.".format(main_menu))
+            continue
 
         try:
             sub_menu = input("Select a team (1-3): ")
             team_opt = int(sub_menu)
 
-            if team_opt == 0 or team_opt > 3:
+            if sub_menu is None:
+                print("{}, is not available from the TEAM MENU.\nPlease ENTER only the available options (1-3).".format(sub_menu))
+
+            elif team_opt == 0 or team_opt > 3:
                 print("{}, is not available from the MENU.\nPlease ENTER only the available options (1-3).".format(sub_menu))
 
         except ValueError:
@@ -67,8 +71,6 @@ def main_selection():
 
 def stats_menu(preferred):
     choice = main_selection()
-    print("choice: {}".format(choice))
-
     stats_template = dedent("""\
                      Team: {} Stats
                      {}
