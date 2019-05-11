@@ -35,8 +35,8 @@ def main_selection():
     while True:
         print("\nBASKETBALL TEAM STATS TOOL\n")
         print("----MENU---\nHere are your choices:\n1) Display Team Stats\n2) Quit")
-        main_menu = input("Enter an option (1-2): ")
         try:
+            main_menu = input("Enter an option (1-2): ")
             menu_opt = int(main_menu)
             if menu_opt == 1:
                 count = 0
@@ -48,12 +48,13 @@ def main_selection():
             else:
                 if menu_opt == 0 or menu_opt > 2:
                     print("{}, is not available from the MENU.\nPlease ENTER only the available options (1-2).".format(main_menu))
+                    continue
 
         except ValueError:
             print("{}, That's an invalid input.\nPlease Enter a NUMBER only from the MENU.".format(main_menu))
 
-        sub_menu = input("Select a team (1-3): ")
         try:
+            sub_menu = input("Select a team (1-3): ")
             team_opt = int(sub_menu)
 
             if team_opt == 0 or team_opt > 3:
@@ -64,7 +65,7 @@ def main_selection():
 
         return team_opt
 
-def stats_menu():
+def stats_menu(preferred):
     choice = main_selection()
     print("choice: {}".format(choice))
     skilled, not_skilled = divide_experienced(players_list)
@@ -157,15 +158,16 @@ def stats_menu():
         print("      The average height for the Warriors Team is: {} inches".format(warriors_avg_ht))
         print("      The Warriors Guardians: {}".format(", ".join(warriors_keepers)))
 
+    return choice
 
 if __name__ == "__main__":
     #clean_data, divide_experience, main_menu, stats_menu, distribute_players, print_stats
+    clean_data()
     try:
         while True:
-            clean_data()
-            main_selection()
-            stats_menu()
+            #clean_data()
+            #main_selection() # nothing catches the value
+            stats_menu(main_selection)
             input("\nPress ENTER to continue...")
-
     except SystemExit:
         print("Program Terminated. Bye!")
