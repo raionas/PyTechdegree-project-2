@@ -68,6 +68,14 @@ def main_selection():
 
         return team_opt
 
+def distribute_players(headcount):
+    skilled, not_skilled = divide_experienced(players_list)
+    if len(skilled) % len(not_skilled) == 0:
+        Panthers = skilled[0:3] + not_skilled[0:3]
+        Bandits = skilled[3:6] + not_skilled[3:6]
+        Warriors = skilled[6:9] + not_skilled[6:9]
+    return Panthers, Bandits, Warriors
+
 def stats_menu(preferred):
     choice = main_selection()
     stats_template = dedent("""\
@@ -80,11 +88,12 @@ def stats_menu(preferred):
                          The average height for the Bandits Team is: {}
                          The Panthers Guardians: {} """)
 
-    skilled, not_skilled = divide_experienced(players_list)
-    if len(skilled) % len(not_skilled) == 0:
-        Panthers = skilled[0:3] + not_skilled[0:3]
-        Bandits = skilled[3:6] + not_skilled[3:6]
-        Warriors = skilled[6:9] + not_skilled[6:9]
+    # skilled, not_skilled = divide_experienced(players_list)
+    # if len(skilled) % len(not_skilled) == 0:
+    #     Panthers = skilled[0:3] + not_skilled[0:3]
+    #     Bandits = skilled[3:6] + not_skilled[3:6]
+    #     Warriors = skilled[6:9] + not_skilled[6:9]
+    Panthers, Bandits, Warriors = distribute_players(players_list)
 
     if choice == 1:
         roster1 = []
