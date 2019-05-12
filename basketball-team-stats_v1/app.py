@@ -58,14 +58,13 @@ def main_selection():
             sub_menu = input("Select a team (1-3): ")
             team_opt = int(sub_menu)
 
-            if sub_menu is None:
-                print("{}, is not available from the TEAM MENU.\nPlease ENTER only the available options (1-3).".format(sub_menu))
-
-            elif team_opt == 0 or team_opt > 3:
+            if team_opt == 0 or team_opt > 3:
                 print("{}, is not available from the MENU.\nPlease ENTER only the available options (1-3).".format(sub_menu))
+                continue
 
         except ValueError:
             print("{}, That's an invalid input.\nPlease Enter a NUMBER only from the MENU.".format(sub_menu))
+            continue
 
         return team_opt
 
@@ -176,7 +175,7 @@ if __name__ == "__main__":
     try:
         while True:
             #main_selection() # nothing catches the value
-            stats_menu(main_selection)
+            stats_menu(1)
             input("\nPress ENTER to continue...")
     except SystemExit:
         print("Program Terminated. Bye!")
