@@ -76,14 +76,12 @@ def distribute_players(headcount):
         Warriors = skilled[6:9] + not_skilled[6:9]
     return Panthers, Bandits, Warriors
 
-def display_stats(team):
+def display_stats(team, team_name):
     roster = []
     seasoned = []
     not_seasoned = []
     keepers = []
-    Panthers, Bandits, Warriors = distribute_players(players_list)
-    teams = Panthers, Bandits, Warriors
-    print(type(teams))
+    #teams = Panthers, Bandits, Warriors
 
     for items in teams:
         for squad in items:
@@ -97,34 +95,36 @@ def display_stats(team):
             sum_ht = sum(squad["height"] for squad in items)
             avg_ht = int(sum_ht / len(roster))
 
-    stats_template = dedent("""\
-                     Team: {} Stats
-                     {}
-                     Total Players: {}
-                     Players on Team: {}
-                       Total Experienced Players: {}
-                       Total Inexperienced Players: {}
-                         The average height for the team is: {}
-                         The Guardians: {} """)
-    print(stats_template.format(
-                "Warriors",
-                "-" * len("Team: Warriors Stats"),
-                len(teams),
-                ", ".join(roster),
-                len(seasoned),
-                len(not_seasoned),
-                avg_ht,
-                ", ".join(keepers)))
-    return teams
+            stats_template = dedent("""\
+                             Team: {} Stats
+                             {}
+                             Total Players: {}
+                             Players on Team: {}
+                               Total Experienced Players: {}
+                               Total Inexperienced Players: {}
+                                 The average height for the team is: {}
+                                 The Guardians: {} """)
+        print(stats_template.format(
+                    teams_list,
+                    "-" * len("Team: Warriors Stats"),
+                    len(teams),
+                    ", ".join(roster),
+                    len(seasoned),
+                    len(not_seasoned),
+                    avg_ht,
+                    ", ".join(keepers)))
+    return team, team_name
 
 def stats_menu(preferred):
+    Panthers, Bandits, Warriors = distribute_players(players_list)
     choice = main_selection()
+    print(Panthers)
     if choice == 1:
-        display_stats("Panthers")
+        display_stats(Panthers, "Panthers")
     if choice == 2:
-        display_stats("Bandits")
+        display_stats(Bandits, "Bandits")
     if choice == 3:
-        display_stats("Warriors")
+        display_stats(Warriors, "Warriors")
     return choice
 
 # def stats_menu(preferred):
