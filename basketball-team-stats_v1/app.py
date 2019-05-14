@@ -83,6 +83,7 @@ def display_stats(team):
     keepers = []
     Panthers, Bandits, Warriors = distribute_players(players_list)
     teams = Panthers, Bandits, Warriors
+    print(type(teams))
 
     for items in teams:
         for squad in items:
