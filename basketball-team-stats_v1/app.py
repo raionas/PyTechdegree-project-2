@@ -45,7 +45,6 @@ def main_selection():
                     print(count,")",team)
             elif menu_opt == 2:
                 sys.exit()
-
             elif menu_opt == 0 or menu_opt > 2:
                     print("{}, is not available from the MENU.\nPlease ENTER only the available options (1-2).".format(main_menu))
                     continue
@@ -81,155 +80,64 @@ def display_stats(team, team_name):
     seasoned = []
     not_seasoned = []
     keepers = []
-    #teams = Panthers, Bandits, Warriors
 
-    for items in teams:
-        for squad in items:
-            roster.append(squad["name"])
-            if squad["experience"] == True:
-                seasoned.append(squad["name"])
-            if squad["experience"] == False:
-                not_seasoned.append(squad["name"])
-                keepers.extend(squad["guardians"])
+    for player in team:
+        # append the players name to the roster. We want them on the roster regardless of exp
+        roster.append(player["name"])
+        # if the player has experienced put them in the seasoned list
+        if player["experience"] == True:
+            seasoned.append(player["name"])
+        # if the player has no experience put them in the not_seasoned list
+        if player["experience"] == False:
+            not_seasoned.append(player["name"])
+        # extend the keepers list with the guardians of the player
+        keepers.extend(player["guardians"])
 
-            sum_ht = sum(squad["height"] for squad in items)
-            avg_ht = int(sum_ht / len(roster))
+        # Get the total height of all players together
+        sum_ht = sum(player["height"] for player in team)
+        # Find the average of all the players
+        avg_ht = int(sum_ht / len(roster))
 
-            stats_template = dedent("""\
-                             Team: {} Stats
-                             {}
-                             Total Players: {}
-                             Players on Team: {}
-                               Total Experienced Players: {}
-                               Total Inexperienced Players: {}
-                                 The average height for the team is: {}
-                                 The Guardians: {} """)
-        print(stats_template.format(
-                    teams_list,
-                    "-" * len("Team: Warriors Stats"),
-                    len(teams),
-                    ", ".join(roster),
-                    len(seasoned),
-                    len(not_seasoned),
-                    avg_ht,
-                    ", ".join(keepers)))
-    return team, team_name
+    stats_template = dedent("""\
+                     Team: {} Stats
+                     {}
+                     Total Players: {}
+                     Players on Team: {}
+                       Total Experienced Players: {}
+                       Total Inexperienced Players: {}
+                         The average height for the team is: {}
+                         The Guardians: {} """)
+    print(stats_template.format(
+                team_name,  # use the team name we sent in
+                "-" * (len("Team:   Stats") + len(team_name)),  # add the length of the team name plus the banner text to make the dashes
+                len(team),
+                ", ".join(roster),  # make the players on the team into a comma separated string
+                len(seasoned),
+                len(not_seasoned),
+                avg_ht,
+                ", ".join(keepers)))  # make the guardians into a comma separated string
 
 def stats_menu(preferred):
-    Panthers, Bandits, Warriors = distribute_players(players_list)
     choice = main_selection()
-    print(Panthers)
+    print(choice)
+    Panthers, Bandits, Warriors = distribute_players(players_list)
+
     if choice == 1:
-        display_stats(Panthers, "Panthers")
+        # display the stats for the Panthers team and send in the name of the team
+        display_stats(Panthers,"Panthers")
     if choice == 2:
+        # display the stats for the Bandits team and send in the name of the team
         display_stats(Bandits, "Bandits")
     if choice == 3:
+        # display the stats for the Warriors team and send in the name of the team
         display_stats(Warriors, "Warriors")
     return choice
-
-# def stats_menu(preferred):
-#     choice = main_selection()
-#     stats_template = dedent("""\
-#                      Team: {} Stats
-#                      {}
-#                      Total Players: {}
-#                      Players on Team: {}
-#                        Total Experienced Players: {}
-#                        Total Inexperienced Players: {}
-#                          The average height for the Bandits Team is: {}
-#                          The Panthers Guardians: {} """)
-
-#     Panthers, Bandits, Warriors = distribute_players(players_list)
-#
-#     if choice == 1:
-#         roster1 = []
-#         seasoned_panthers = []
-#         not_seasoned_panthers = []
-#         panthers_keepers = []
-#
-#         for items in Panthers:
-#             roster1.append(items["name"])
-#             if items["experience"] == True:
-#                 seasoned_panthers.append(items["name"])
-#             if items["experience"] == False:
-#                 not_seasoned_panthers.append(items["name"])
-#             panthers_keepers.extend(items["guardians"])
-#
-#         panthers_sum_ht = sum(items["height"] for items in Panthers)
-#         panthers_avg_ht = int(panthers_sum_ht / len(roster1))
-#
-#         print(stats_template.format(
-#                     "Panthers",
-#                     "-" * len("Team: Panthers Stats"),
-#                     len(Warriors),
-#                     ", ".join(roster1),
-#                     len(seasoned_panthers),
-#                     len(not_seasoned_panthers),
-#                     panthers_avg_ht,
-#                     ", ".join(panthers_keepers)))
-#
-#     elif choice == 2:
-#         roster2 = []
-#         seasoned_bandits = []
-#         not_seasoned_bandits = []
-#         bandits_keepers = []
-#
-#         for items in Bandits:
-#             roster2.append(items["name"])
-#             if items["experience"] == True:
-#                 seasoned_bandits.append(items["name"])
-#             if items["experience"] == False:
-#                 not_seasoned_bandits.append(items["name"])
-#             bandits_keepers.extend(items["guardians"])
-#
-#         bandits_sum_ht = sum(items["height"] for items in Bandits)
-#         bandits_avg_ht = int(bandits_sum_ht / len(roster2))
-#
-#         print(stats_template.format(
-#                     "Bandits",
-#                     "-" * len("Team: Bandits Stats"),
-#                     len(Bandits),
-#                     ", ".join(roster2),
-#                     len(seasoned_bandits),
-#                     len(not_seasoned_bandits),
-#                     bandits_avg_ht,
-#                     ", ".join(bandits_keepers)))
-#
-#     elif choice == 3:
-#         roster3 = []
-#         seasoned_warriors = []
-#         not_seasoned_warriors = []
-#         warriors_keepers = []
-#
-#         for items in Warriors:
-#             roster3.append(items["name"])
-#             if items["experience"] == True:
-#                 seasoned_warriors.append(items["name"])
-#             if items["experience"] == False:
-#                 not_seasoned_warriors.append(items["name"])
-#             warriors_keepers.extend(items["guardians"])
-#
-#         warriors_sum_ht = sum(items["height"] for items in Warriors)
-#         warriors_avg_ht = int(warriors_sum_ht / len(roster3))
-#
-        # print(stats_template.format(
-        #             "Warriors",
-        #             "-" * len("Team: Warriors Stats"),
-        #             len(Warriors),
-        #             ", ".join(roster3),
-        #             len(seasoned_warriors),
-        #             len(not_seasoned_warriors),
-        #             warriors_avg_ht,
-        #             ", ".join(warriors_keepers)))
-#
-#     return choice
 
 if __name__ == "__main__":
     #clean_data, divide_experience, main_menu, stats_menu, distribute_players, print_stats
     clean_data()
     try:
         while True:
-            #main_selection() # nothing catches the value
             stats_menu(1)
             input("\nPress ENTER to continue...")
     except SystemExit:
