@@ -13,7 +13,6 @@ Here are your choices:
 2) Quit
 Enter an option (1-2): 1
 1 ) Panthers
-
 2 ) Bandits
 3 ) Warriors
 Select a team (1-3): 3
