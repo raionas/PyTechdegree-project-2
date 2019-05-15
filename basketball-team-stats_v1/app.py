@@ -1,14 +1,3 @@
-import constants
-import sys
-from copy import deepcopy
-from textwrap import dedent
-
-players = constants.PLAYERS
-teams_list = constants.TEAMS
-players_list = deepcopy(players)
-skilled = []
-not_skilled = []
-
 def clean_data():
     for items in players_list:
         if items["experience"] == "YES":
@@ -34,7 +23,7 @@ def divide_experienced(all_players):
 def main_selection():
     while True:
         print("\nBASKETBALL TEAM STATS TOOL\n")
-        print("----MENU---\nHere are your choices:\n1) Display Team Stats\n2) Quit")
+        print("{}MENU{}\nHere are your choices:\n1) Display Team Stats\n2) Quit".format('-' * 11, '-' * 11))
         try:
             main_menu = input("Enter an option (1-2): ")
             menu_opt = int(main_menu)
@@ -64,7 +53,6 @@ def main_selection():
         except ValueError:
             print("{}, That's an invalid input.\nPlease Enter a NUMBER only from the MENU.".format(sub_menu))
             continue
-
         return team_opt
 
 def distribute_players(headcount):
@@ -82,20 +70,14 @@ def display_stats(team, team_name):
     keepers = []
 
     for player in team:
-        # append the players name to the roster. We want them on the roster regardless of exp
         roster.append(player["name"])
-        # if the player has experienced put them in the seasoned list
         if player["experience"] == True:
             seasoned.append(player["name"])
-        # if the player has no experience put them in the not_seasoned list
         if player["experience"] == False:
             not_seasoned.append(player["name"])
-        # extend the keepers list with the guardians of the player
         keepers.extend(player["guardians"])
 
-        # Get the total height of all players together
         sum_ht = sum(player["height"] for player in team)
-        # Find the average of all the players
         avg_ht = int(sum_ht / len(roster))
 
     stats_template = dedent("""\
@@ -108,14 +90,14 @@ def display_stats(team, team_name):
                          The average height for the team is: {}
                          The Guardians: {} """)
     print(stats_template.format(
-                team_name,  # use the team name we sent in
-                "-" * (len("Team:   Stats") + len(team_name)),  # add the length of the team name plus the banner text to make the dashes
+                team_name,
+                "-" * (len("Team:   Stats") + len(team_name)),
                 len(team),
-                ", ".join(roster),  # make the players on the team into a comma separated string
+                ", ".join(roster),
                 len(seasoned),
                 len(not_seasoned),
                 avg_ht,
-                ", ".join(keepers)))  # make the guardians into a comma separated string
+                ", ".join(keepers)))
 
 def stats_menu(preferred):
     choice = main_selection()
@@ -123,18 +105,25 @@ def stats_menu(preferred):
     Panthers, Bandits, Warriors = distribute_players(players_list)
 
     if choice == 1:
-        # display the stats for the Panthers team and send in the name of the team
         display_stats(Panthers,"Panthers")
     if choice == 2:
-        # display the stats for the Bandits team and send in the name of the team
         display_stats(Bandits, "Bandits")
     if choice == 3:
-        # display the stats for the Warriors team and send in the name of the team
         display_stats(Warriors, "Warriors")
     return choice
 
 if __name__ == "__main__":
-    #clean_data, divide_experience, main_menu, stats_menu, distribute_players, print_stats
+    import constants
+    import sys
+    from copy import deepcopy
+    from textwrap import dedent
+
+    players = constants.PLAYERS
+    teams_list = constants.TEAMS
+    players_list = deepcopy(players)
+    skilled = []
+    not_skilled = []
+
     clean_data()
     try:
         while True:
