@@ -1,4 +1,4 @@
-# PyTechdegree-project-2
+# Python Techdegree project 2
 ## Basketball Team Statistics Tool
 
 #### This project shows the utilisation of built-in Python data types that integrates these types to build structures to manage the storage and grouping of a Basketball squad into distributed teams. Also, this tool will also produce some statistics for a team whilst striking a balance for the team by the total number of players.
